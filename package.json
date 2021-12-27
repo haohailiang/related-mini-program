@@ -2,7 +2,7 @@
   "name": "relate-mini-program",
   "displayName": "relative-min-program",
   "description": "获取小程序的关联文件",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "haohailiang",
   "license": "MIT",
   "icon": "assets/icon.png",

@@ -241,15 +241,35 @@ function showRelated() {
   // components/experience-header/index.json
   // components/experience-header/index.wxml
   // components/experience-header/index.wxss
-  const regexp = /^(components|pages)\/([a-zA-Z0-9-]*)\/index\.(js|json|wxml|wxss)$/i;
-  if (regexp.test(curRelativePath)) {
-    const resultLists = curRelativePath.match(regexp);
+  // components/experience-header/index.wxss
+  // api/card-identify.js
+  const apiRegexp = /^api\/([a-zA-Z0-9-]+)\.js$/i;
+  const modelRegexp = /^(components|pages)\/([a-zA-Z0-9-]+)\/index\.(js|json|wxml|wxss)$/i;
+  if (apiRegexp.test(curRelativePath)) {
+    const resultLists = curRelativePath.match(apiRegexp);
+    const [ , moduleName ] = resultLists;
+    const componentsBasePath = `components/${moduleName}/index.`;
+    const pagesBasePath = `pages/${moduleName}/index.`;
+    const suffixPool = ['wxml', 'wxss', 'js', 'json'];
+    const tempComponentsPatterns = suffixPool.map(v => `${maybeWorkspaceFolder}/${componentsBasePath}${v}`);
+    const tempPagesPatterns = suffixPool.map(v => `${maybeWorkspaceFolder}/${pagesBasePath}${v}`);
+    const tempPatterns = [
+      ...tempComponentsPatterns,
+      ...tempPagesPatterns,
+    ]
+    allFiles = fg.sync(tempPatterns, { dot: true, ignore: ignorePatterns });
+  } else if (modelRegexp.test(curRelativePath)) {
+    const resultLists = curRelativePath.match(modelRegexp);
     const [ , moduleType, moduleName, suffix ] = resultLists;
     const basePath = `${moduleType}/${moduleName}/index.`;
     const suffixPool = ['wxml', 'wxss', 'js', 'json'];
     const usefullSuffix = suffixPool.filter(v => v !==  suffix);
   
-    const tempPatterns = usefullSuffix.map(v => `${maybeWorkspaceFolder}/${basePath}${v}`);
+    let tempPatterns = usefullSuffix.map(v => `${maybeWorkspaceFolder}/${basePath}${v}`);
+    tempPatterns = [
+      ...tempPatterns,
+      `${maybeWorkspaceFolder}/api/${moduleName}.js`
+    ]
     allFiles = fg.sync(tempPatterns, { dot: true, ignore: ignorePatterns });
   } else {
     allFiles = []

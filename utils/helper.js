@@ -141,20 +141,20 @@ function determineLabelType(fileName, prefixPath) {
 }
 
 function getLabel(fileName) {
-  if (/\.js$/.test(fileName)) {
+  if (/index\.js$/.test(fileName)) {
     return '脚本'
   }
-  if (/\.json$/.test(fileName)) {
+  if (/index\.json$/.test(fileName)) {
     return '配置'
   }
-  if (/\.wxml$/.test(fileName)) {
+  if (/index\.wxml$/.test(fileName)) {
     return '组件'
   }
-  if (/\.wxss$/.test(fileName)) {
+  if (/index\.wxss$/.test(fileName)) {
     return '样式'
   }
 
-  return ''
+  return '请求'
 }
 
 /**
