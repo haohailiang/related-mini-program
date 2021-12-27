@@ -1,8 +1,8 @@
 {
-  "name": "relate-files",
-  "displayName": "relative",
-  "description": "获取feather框架关联的文件",
-  "version": "0.1.6",
+  "name": "relate-mini-program",
+  "displayName": "relative-min-program",
+  "description": "获取小程序的关联文件",
+  "version": "0.0.3",
   "publisher": "haohailiang",
   "license": "MIT",
   "icon": "assets/icon.png",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/haohailiang/related-files-hopper.git"
+    "url": "https://github.com/haohailiang/related-mini-program.git"
   },
   "categories": [
     "Other"
@@ -33,7 +33,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "related-files-hopper configuration",
+      "title": "related-mini-program configuration",
       "properties": {
         "fileHopper.labelRuleSets": {
           "type": "array",
