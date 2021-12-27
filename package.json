@@ -1,0 +1,191 @@
+{
+  "name": "relate-files",
+  "displayName": "relative",
+  "description": "获取feather框架关联的文件",
+  "version": "0.1.6",
+  "publisher": "haohailiang",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haohailiang/related-files-hopper.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "related",
+    "files",
+    "jump",
+    "similar",
+    "find",
+    "feather",
+    "navigate",
+    "open"
+  ],
+  "activationEvents": [
+    "onCommand:fileHopper.show"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "related-files-hopper configuration",
+      "properties": {
+        "fileHopper.labelRuleSets": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "required": [
+              "folderName",
+              "title",
+              "regexPatterns"
+            ],
+            "properties": {
+              "folderName": {
+                "type": "string",
+                "description": "Specifies the name of the folder/subfolder."
+              },
+              "title": {
+                "type": "string",
+                "description": "Specifies the label title."
+              },
+              "regexPatterns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Specifies the regular expression pattern."
+              }
+            }
+          }
+        },
+        "fileHopper.appRootFolders": {
+          "type": "array",
+          "default": [
+            "app"
+          ]
+        },
+        "fileHopper.appSubRootFolders": {
+          "type": "array",
+          "default": [
+            "addon",
+            "app"
+          ]
+        },
+        "fileHopper.appSubFolders": {
+          "type": "array",
+          "default": [
+            "controllers",
+            "routes",
+            "a11y",
+            "templates",
+            "components",
+            "models",
+            "styles",
+            "helpers",
+            "initializers",
+            "services",
+            "instance-initializers",
+            "mixins",
+            "utils",
+            "serializers",
+            "adapters"
+          ]
+        },
+        "fileHopper.testSubRootFolders": {
+          "type": "array",
+          "default": [
+            "tests"
+          ]
+        },
+        "fileHopper.testRootFolders": {
+          "type": "array",
+          "default": [
+            "tests"
+          ]
+        },
+        "fileHopper.testSubFolders": {
+          "type": "array",
+          "default": [
+            "acceptance",
+            "integration",
+            "unit"
+          ]
+        },
+        "fileHopper.testFilePattern": {
+          "type": "string",
+          "default": "-test"
+        },
+        "fileHopper.supportedExtensions": {
+          "type": "array",
+          "default": [
+            "js",
+            "ts",
+            "html",
+            "hbs",
+            "css",
+            "scss"
+          ]
+        },
+        "fileHopper.ignorePatterns": {
+          "type": "array",
+          "description": "An array of glob patterns that needs to be ignored",
+          "default": [
+            "**/node_modules"
+          ]
+        },
+        "fileHopper.customGlobPatterns": {
+          "type": "array",
+          "description": "Add custom glob patterns for your app %FILE_NAME% wild card will be replaced with the current file name and %FILE_EXT% will be replaced with the supportedExtensions from config"
+        },
+        "fileHopper.patternsToStrip": {
+          "type": "array",
+          "default": [
+            "{EXTENSION}",
+            "/[_\\.]?-[tT]est$/"
+          ],
+          "description": "Regular expressions or strings to remove from the path"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "fileHopper.show",
+        "title": "Quick Open Related Files"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "fileHopper.show",
+        "key": "ctrl+/",
+        "mac": "cmd+k cmd+v",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
+    "test": "node ./test/runTest.js --coverage --collectCoverageFrom=./utils/**/*.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.28",
+    "@types/vscode": "^1.30.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^7.20.0",
+    "glob": "^7.1.5",
+    "mocha": "^8.3.0",
+    "typescript": "^4.1.5",
+    "vscode-test": "^1.2.2"
+  },
+  "dependencies": {
+    "fast-glob": "^3.1.1",
+    "pluralize": "^8.0.0"
+  }
+}
